@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import LGPDLink from "@/components/LGPDLink";
 
 const Footer = () => {
   return (
@@ -103,15 +104,15 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 mb-4 md:mb-0">
-            © 2024 Saborê. Todos os direitos reservados.
+            © 2025 Saborê. Todos os direitos reservados.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-white/60 hover:text-sabore-yellow transition-colors">
+            <LGPDLink className="text-white/60 hover:text-sabore-yellow transition-colors">
               Termos de Uso
-            </a>
-            <a href="#" className="text-white/60 hover:text-sabore-yellow transition-colors">
+            </LGPDLink>
+            <LGPDLink className="text-white/60 hover:text-sabore-yellow transition-colors">
               Política de Privacidade
-            </a>
+            </LGPDLink>
             <a href="#" className="text-white/60 hover:text-sabore-yellow transition-colors">
               Cookies
             </a>

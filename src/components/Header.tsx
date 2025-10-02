@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import LGPDLink from "@/components/LGPDLink";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,9 +21,9 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="text-foreground hover:text-sabore-green">
-              Entrar
-            </Button>
+            <LGPDLink className="text-foreground hover:text-sabore-green text-sm">
+              Termos de Compromisso e Privacidade
+            </LGPDLink>
             <Link to="/cadastro">
               <Button variant="hero">
                 Cadastrar Restaurante
@@ -47,9 +48,11 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border/50">
             <div className="space-y-2">
-                <Button variant="ghost" className="w-full text-foreground hover:text-sabore-green">
-                  Entrar
-                </Button>
+                <div className="w-full text-center">
+                  <LGPDLink className="text-foreground hover:text-sabore-green text-sm">
+                    Termos de Compromisso e Privacidade
+                  </LGPDLink>
+                </div>
                 <Link to="/cadastro" className="w-full">
                   <Button variant="hero" className="w-full">
                     Cadastrar Restaurante

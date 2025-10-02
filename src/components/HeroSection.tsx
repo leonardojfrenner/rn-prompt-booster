@@ -40,15 +40,6 @@ const HeroSection = () => {
           Conecte-se com clientes famintos e veja seu negócio florescer na maior plataforma gastronômica do Brasil.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button variant="accent" size="lg" className="text-lg px-8 py-6 h-auto">
-            Cadastre seu Restaurante Grátis
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8 py-6 h-auto text-white border-white hover:bg-white hover:text-sabore-green">
-            Ver Como Funciona
-          </Button>
-        </div>
 
         {/* Trust Indicators */}
         <div className="flex flex-wrap justify-center gap-8 text-white/80">

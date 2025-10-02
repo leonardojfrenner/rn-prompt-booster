@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Image as ImageIcon } from "lucide-react";
 import Header from "@/components/Header";
+import LGPD from "@/pages/LGPD";
 import { cadastrarRestaurante, uploadRestauranteArquivo, buscarEnderecoPorCep, RestauranteCreate } from "@/api/restaurante";
 
 const Cadastro = () => {
@@ -610,9 +611,7 @@ const Cadastro = () => {
                     <Label htmlFor="protecao" className="text-sm">
                       Li e aceito a política de proteção de dados *
                     </Label>
-                    <Badge variant="outline" className="text-xs">
-                      ?
-                    </Badge>
+                    <LGPD />
                   </div>
                 </div>
               </div>
