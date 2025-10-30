@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { perguntarChatbot } from "@/api/chat";
 
 interface Message {
   id: string;
@@ -21,6 +22,7 @@ const ChatSupport = () => {
     },
   ]);
   const [inputMessage, setInputMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -32,7 +34,7 @@ const ChatSupport = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
     const newMessage: Message = {
@@ -45,16 +47,27 @@ const ChatSupport = () => {
     setMessages((prev) => [...prev, newMessage]);
     setInputMessage("");
 
-    // Simular resposta do suporte (placeholder para quando implementar o backend)
-    setTimeout(() => {
+    setIsLoading(true);
+    try {
+      const resposta = await perguntarChatbot(newMessage.text);
       const supportResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: "Entendemos sua solicitação. Nossa equipe de suporte entrará em contato em breve! Em breve, aqui será integrado com nosso sistema de atendimento.",
+        text: resposta || "",
         sender: "support",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, supportResponse]);
-    }, 1000);
+    } catch (error) {
+      const errorResponse: Message = {
+        id: (Date.now() + 2).toString(),
+        text: "Desculpe, ocorreu um erro ao falar com o suporte. Tente novamente em instantes.",
+        sender: "support",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
+      setIsLoading(false);
+    }
 
     // Resetar altura do textarea
     if (textareaRef.current) {
@@ -187,13 +200,19 @@ const ChatSupport = () => {
             />
             <Button
               onClick={handleSendMessage}
-              disabled={!inputMessage.trim()}
+              disabled={!inputMessage.trim() || isLoading}
               className="bg-gradient-hero hover:opacity-90 text-white px-4 h-[44px] disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
               aria-label="Enviar mensagem"
             >
               <Send className="w-4 h-4" />
             </Button>
           </div>
+          {isLoading && (
+            <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+              <span className="inline-block w-2 h-2 rounded-full bg-sabore-green animate-pulse" />
+              <span>Suporte está digitando...</span>
+            </div>
+          )}
           <p className="text-xs text-muted-foreground mt-2 text-center">
             Digite Enter para enviar, Shift+Enter para nova linha
           </p>
